@@ -15,13 +15,11 @@ import ballerinax/postgresql.driver as _;
 import commons/attachment.server as _;
 ```
 
-Pin `commons/attachment` and `commons/service_commons` with `repository = "local"` in `Ballerina.toml`.
-
 ```toml
 [commons.attachment.server]
 port = 9102                    # default
 basePath = "/attachments/v1"   # default; signed links live under <basePath>/links
-ns = "tenant-app"
+ns = "my-app"
 storage = "DATABASE"           # or "FILESYSTEM" with storageDir
 maxFileBytes = 10485760        # default 10 MB
 linkSecret = "change-me"       # signs download links; random per process when empty
@@ -32,12 +30,12 @@ adminRoles = [
 
 [commons.attachment.server.auth]
 enableJwtAuth = true
-jwksUrl = "https://localhost:8090/oauth2/jwks"
+jwksUrl = "https://idp.example.com/oauth2/jwks"
 enforceScopes = true
 
 [commons.attachment.server.db]
 dbType = "POSTGRESQL"
-url = "jdbc:postgresql://localhost:5432/tenantapp"
+url = "jdbc:postgresql://localhost:5432/myapp"
 
 [[commons.attachment.server.webhooks]]
 participantId = "agent:maintenance-triage"
@@ -135,5 +133,3 @@ depending on the database.
   transaction fails.
 
 Tested on H2, with both storage types. MySQL and PostgreSQL haven't been run yet.
-
-Design: `docs/demos/tenant-app/proposal.md` §9.
