@@ -1,0 +1,23 @@
+[commons.attachment.server]
+port = 19102
+ns = "test"
+maxFileBytes = 4096
+adminRoles = [
+    {role = "PropertyManager", permissions = ["read", "delete"]},
+    {role = "Auditor", permissions = []}
+]
+
+[commons.attachment.server.auth]
+enforceScopes = true
+
+[commons.attachment.server.db]
+url = "jdbc:h2:mem:attachment-test;DB_CLOSE_DELAY=-1"
+
+[commons.attachment.server.webhookDelivery]
+initialBackoff = 0.1
+retryInterval = 0.5
+
+[[commons.attachment.server.webhooks]]
+participantId = "agent:triage"
+url = "http://localhost:19303/agent/events"
+secret = "s3cret"

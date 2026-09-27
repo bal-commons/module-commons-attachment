@@ -1,0 +1,23 @@
+[package]
+org = "commons"
+name = "attachment"
+version = "0.1.0"
+distribution = "2201.13.4"
+authors = ["Hasitha Aravinda"]
+license = ["Apache-2.0"]
+repository = "https://github.com/bal-commons/module-commons-attachment"
+keywords = ["commons", "attachment", "upload", "files"]
+readme = "README.md"
+
+[build-options]
+observabilityIncluded = true
+
+[[dependency]]
+org = "commons"
+name = "service_commons"
+version = "0.1.0"
+repository = "local"
+
+[[package.modules]]
+name = "attachment.server"
+export = true
