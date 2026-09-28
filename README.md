@@ -8,6 +8,11 @@ upload what. Its subjects upload into typed slots and submit. Admin roles manage
 | `attachment` | Types and `Client`. Safe to import anywhere. |
 | `attachment.server` | The HTTP service. Importing it starts the listener. |
 
+## UI components
+
+[`@bal-commons/attachment-ui`](ui/README.md) (npm) provides `<commons-upload-case>`, live Web Components for this service, and an
+integration prompt to copy into a coding assistant.
+
 ## Run it inside an application
 
 ```ballerina
