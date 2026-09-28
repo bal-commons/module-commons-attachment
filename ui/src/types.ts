@@ -31,6 +31,8 @@ export interface Case {
   description?: string;
   status: CaseStatus;
   subjects: string[];
+  watchers?: string[];
+  createdBy: string;
   slots: Slot[];
   files?: Attachment[];
   autoSubmit: boolean;
@@ -38,4 +40,18 @@ export interface Case {
   statusReason?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CasePage {
+  items: Case[];
+  nextCursor?: string;
+}
+
+export interface CaseQuery {
+  status?: CaseStatus;
+  correlationId?: string;
+  // Admin listing only.
+  subject?: string;
+  cursor?: string;
+  limit?: number;
 }
