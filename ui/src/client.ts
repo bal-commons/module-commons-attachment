@@ -70,6 +70,11 @@ export class AttachmentClient {
     }
     const {url, expiresAt} = await request<{url: string; expiresAt: string}>(this.baseUrl,
         `/cases/${encodeURIComponent(caseId)}/files/${encodeURIComponent(fileId)}/link`, {method: "POST", auth: this.auth});
+    // An absolute URL (a signed storage link, or a blob: URL from a mock) is used as it is.
+    if (/^[a-z][a-z0-9+.-]*:/i.test(url)) {
+      links.set(fileId, {url, expires: new Date(expiresAt).getTime()});
+      return url;
+    }
     const base = new URL(this.baseUrl, globalThis.location?.href);
     const servicePath = base.pathname.replace(/\/+$/, "");
     const relative = url.startsWith(servicePath) ? url.slice(servicePath.length) : url.replace(/^\/[^/]+\/v\d+/, "");
